@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>MacroTracking</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png">
+  
+    
+  
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/2f612b6eee.js" crossorigin="anonymous"></script>
+    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/fullcalendar.css">
+    <link href="css/widgets.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="css/xcharts.min.css" rel=" stylesheet">
+    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+  </head>
+  
+  <body>
+    <section id="container" class="">
+  
+  
+      <header class="header dark-bg">
+        <div class="toggle-nav">
+          <div class="icon-reorder tooltips" data-toggle="collapse" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+        </div>
+  
+        <a href="/dashboard" class="logo">Macro <span class="lite">Tracking</span></a>
+  
+        <div class="top-nav notification-row">
+          <!-- notificatoin dropdown start-->
+          <ul class="nav pull-right top-menu">
+
+            <!-- inbox notificatoin start-->
+            <li id="mail_notificatoin_bar" class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <i class="icon-envelope-l"></i>
+                              <span class="badge bg-important">1</span>
+                          </a>
+              <ul class="dropdown-menu extended inbox">
+                <div class="notify-arrow notify-arrow-blue"></div>
+                <li>
+                  <p class="blue">You have 1 new messages</p>
+                </li>
+                <li>
+                  <a href="#">
+                                      <span class="photo"><img alt="avatar" src="./img/steve.jpg"></span>
+                                      <span class="subject">
+                                      <span class="from">Steve</span>
+                                      <span class="time">1 min</span>
+                                      </span>
+                                      <span class="message">
+                                          Criss de cabochon
+                                      </span>
+                                  </a>
+                </li>               
+              </ul>
+            </li>
+            <li id="alert_notificatoin_bar" class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+  
+                              <i class="icon-bell-l"></i>
+                              <span class="badge bg-important">0</span>
+                          </a>
+              <ul class="dropdown-menu extended notification">
+                <div class="notify-arrow notify-arrow-blue"></div>
+                <li>
+                  <p class="blue">You have 0 new notifications</p>
+                </li>
+                <li>
+                  <a href="#">
+                                      <span class="label label-primary"><i class="icon_profile"></i></span>
+                                      !!!!!!
+                                      <span class="small italic pull-right">5 mins</span>
+                                  </a>
+                </li>                
+                <li>
+                  <a href="#">See all notifications</a>
+                </li>
+              </ul>
+            </li>
+            
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <span class="profile-ava">
+                                  <img alt="" src="img/avatar1_small.jpg">
+                              </span>
+                              <span class="username"><%= user.name %></span>
+                              <b class="caret"></b>
+                          </a>
+              <ul class="dropdown-menu extended logout">
+                <div class="log-arrow-up"></div>
+                <li class="eborder-top">
+                  <a href="/edit"><i class="icon_profile"></i> My Profile</a>
+                </li>
+                <li>
+                  <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                </li>
+                <li>
+                  <a href="/users/logout"><i class="icon_key_alt"></i> Log Out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </header>
+  
+      <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <ul class="sidebar-menu">
+            <li class="active">
+              <a class="" href="/dashboard">
+                            <i class="icon_house_alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Meals</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+              <ul class="sub">
+                <li><a class="" href="/addmeal">Manage</a></li>
+                <li><a class="" href="/mealplans">Plans</a></li>
+              </ul>
+            </li> 
+          </ul>
+        </div>
+      </aside> 
+
+      <section id="main-content">
+        <section class="wrapper">
+          <div class="row">
+            <div class="col-lg-12">
+              <h3 class="page-header"><i class="fa fa-laptop"></i> Add Meal</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-laptop"><a href="/addmeal"></i>Addmeal</a></li>
+              </ol>
+            </div>
+          </div>  
+
+
+        <div class="row">
+          <form class="" action="/addmeal" method="post">
+
+            <div class="col-lg-12">
+              <div class="panel panel-default">
+                
+                <div class="panel-body table-responsive">
+                  <table class="table bootstrap-datatable countries">
+             <thead>
+                 <h4>Your meals list</h4>
+             <tr>
+                 <th>Name</th>
+                 <th>Calories</th>
+                 <th>Action</th>
+             </tr>
+            </thead>
+            <tbody>
+                <% for (var i = 0; i < meals.length; i++) { %>
+             <tr>
+                <td><a href="/food/<%= meals[i].shareID %>"><%= meals[i].name %></a></td>
+                <td><%= meals[i].calories %></td>
+                <td><button class="btn btn-danger btn-block" type="submit" id="removeMeal<%- i %>"  onclick="sendData('\'<%- meals[i].name %>\'')">X</button></td>
+                <input type="text" id="removeMeal" name="removeMeal" hidden>
+               <script>
+                  function sendData(name){
+                  document.getElementById('removeMeal').value = name;
+                  }
+                </script>
+             </tr>
+             <% } %>
+             <tr>
+              <td><input class="form-control m-bot15" type="text" name="meal" ></td>
+              <td><input class="form-control m-bot15" type="text" name="calories" ></td>
+              <td><button name="addMeal" type="submit" class="btn btn-primary btn-block">+</button></td>
+          </tr>
+            </tbody>
+         </table>
+                </div>
+            </div>
+        </div>
+        
+      </form>
+
+    </div>
+
+      
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa-laptop"></i> Search</h3>
+      </div>
+    </div> 
+
+  </div>
+
+      <div class="row">
+
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              
+              <div class="panel-body table-responsive">
+                <table class="table bootstrap-datatable countries">
+           <thead>
+             <% if(user.searchHistory[0] != undefined) { %>
+            <h4>Based on a :
+              <%= user.searchHistory[0].servingSize%> 
+              <%= user.searchHistory[0].servingSizeUnit%> serving
+            </h4>
+             <h6>(tip: add -b at the end of your request to search through branded menu. e.g. «tim horton's farmer wrap-b»)</h6>
+            <% } %>
+                <form class="" action="/searchmeal" method="post">
+                    <input class="form-control" type="text" name="searchmeal"> 
+                </form>
+                <% if(user.searchHistory[0] != undefined) { %>
+
+           <tr>
+               <th>Name</th>
+               <th>Calories</th>
+               <th>Proteins</th>
+               <th>Carbs</th>
+               <th>Fats</th>
+               <th>Action</th>
+           </tr>
+          </thead>
+          <tbody>
+            <form class="" action="/addMeal" method="post">
+              
+                <tr>
+                  <td><%= user.searchHistory[0].name %></td>
+                  <td><%= user.searchHistory[0].calories %></td>
+                  <td><%= user.searchHistory[0].proteins %>g</td>
+                  <td><%= user.searchHistory[0].carbs %>g</td>
+                  <td><%= user.searchHistory[0].fats %>g</td>
+                  <td><button type="submit" class="btn btn-primary btn-block" name="customAdd">+</button></td>
+                </tr>
+            
+            </form>
+          </tbody>
+       </table>            <% } %>
+
+              </div>
+          </div>
+      </div>
+  </div>
+  </section>
+</section>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/fullcalendar.min.js"></script>
+      <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+      <script src="js/calendar-custom.js"></script>
+      <script src="js/jquery.rateit.min.js"></script>
+      <script src="js/jquery.customSelect.min.js"></script>
+      <script src="assets/chart-master/Chart.js"></script>
+  
+      <script src="js/scripts.js"></script>
+      <script src="js/sparkline-chart.js"></script>
+      <script src="js/easy-pie-chart.js"></script>
+      <script src="js/jquery-jvectormap-1.2.2.min.js"></script>
+      <script src="js/jquery-jvectormap-world-mill-en.js"></script>
+      <script src="js/xcharts.min.js"></script>
+      <script src="js/jquery.autosize.min.js"></script>
+      <script src="js/jquery.placeholder.min.js"></script>
+      <script src="js/gdp-data.js"></script>
+      <script src="js/morris.min.js"></script>
+      <script src="js/sparklines.js"></script>
+      <script src="js/charts.js"></script>
+      <script src="js/jquery.slimscroll.min.js"></script>
+  </body>
+</html>

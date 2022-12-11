@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>MacroTracking</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.png">
+  
+    
+  
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/2f612b6eee.js" crossorigin="anonymous"></script>
+    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/fullcalendar.css">
+    <link href="css/widgets.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="css/xcharts.min.css" rel=" stylesheet">
+    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+  </head>
+  
+  <body>
+    <% var getAge = Math.floor((new Date() - new Date(user.dateOfBirth).getTime()) / 3.15576e+10); %>
+        <% var MSJEquation = 0; %>
+        <% var activityRate = 0; %>
+        <% 
+        switch(user.activity) {
+            case "Sedentary":
+              activityRate = 1.2;
+              break;
+            case "Lightly active":
+              activityRate = 1.375;
+              break;
+              case "Moderatly active":
+              activityRate = 1.55;
+              break;
+              case "Very active":
+              activityRate = 1.725;
+              break;
+              case "Extra active":
+              activityRate = 1.9;
+              break;
+          } %>
+          
+        <% if(user.gender == "Male") { MSJEquation = ((10*user.weight) + (6.25 * user.height) - (5 * getAge) + 5) * activityRate; } %>
+        <% if(user.gender == "Female") { MSJEquation = ((10*user.weight) + (6.25 * user.height) - (5 * getAge) - 161) * activityRate; }%>
+        <% if(user.goal == "Bulk") { MSJEquation = Math.ceil((MSJEquation) * 1.10) } %>
+        <% if(user.goal == "Weight Loss") { MSJEquation = (Math.ceil(MSJEquation)) - 500 } %>
+
+
+    <section id="container" class="">
+  
+  
+      <header class="header dark-bg">
+        <div class="toggle-nav">
+          <div class="icon-reorder tooltips" data-toggle="collapse" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+        </div>
+  
+        <a href="/dashboard" class="logo">Macro <span class="lite">Tracking</span></a>
+  
+        <div class="top-nav notification-row">
+          <!-- notificatoin dropdown start-->
+          <ul class="nav pull-right top-menu">
+
+            <!-- inbox notificatoin start-->
+            <li id="mail_notificatoin_bar" class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <i class="icon-envelope-l"></i>
+                              <span class="badge bg-important">1</span>
+                          </a>
+              <ul class="dropdown-menu extended inbox">
+                <div class="notify-arrow notify-arrow-blue"></div>
+                <li>
+                  <p class="blue">You have 1 new messages</p>
+                </li>
+                <li>
+                  <a href="#">
+                                      <span class="photo"><img alt="avatar" src="./img/steve.jpg"></span>
+                                      <span class="subject">
+                                      <span class="from">Steve</span>
+                                      <span class="time">1 min</span>
+                                      </span>
+                                      <span class="message">
+                                          Criss de cabochon
+                                      </span>
+                                  </a>
+                </li>               
+              </ul>
+            </li>
+            <li id="alert_notificatoin_bar" class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+  
+                              <i class="icon-bell-l"></i>
+                              <span class="badge bg-important">0</span>
+                          </a>
+              <ul class="dropdown-menu extended notification">
+                <div class="notify-arrow notify-arrow-blue"></div>
+                <li>
+                  <p class="blue">You have 0 new notifications</p>
+                </li>
+                <li>
+                  <a href="#">
+                                      <span class="label label-primary"><i class="icon_profile"></i></span>
+                                      !!!!!!
+                                      <span class="small italic pull-right">5 mins</span>
+                                  </a>
+                </li>                
+                <li>
+                  <a href="#">See all notifications</a>
+                </li>
+              </ul>
+            </li>
+            
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                              <span class="profile-ava">
+                                  <img alt="" src="img/avatar1_small.jpg">
+                              </span>
+                              <span class="username"><%= user.name %></span>
+                              <b class="caret"></b>
+                          </a>
+              <ul class="dropdown-menu extended logout">
+                <div class="log-arrow-up"></div>
+                <li class="eborder-top">
+                  <a href="/edit"><i class="icon_profile"></i> My Profile</a>
+                </li>
+                <li>
+                  <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                </li>
+                <li>
+                  <a href="/users/logout"><i class="icon_key_alt"></i> Log Out</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </header>
+  
+      <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <ul class="sidebar-menu">
+            <li class="active">
+              <a class="" href="/dashboard">
+                            <i class="icon_house_alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Meals</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+              <ul class="sub">
+                <li><a class="" href="/addmeal">Manage</a></li>
+                <li><a class="" href="/mealplans">Plans</a></li>
+              </ul>
+            </li> 
+          </ul>
+        </div>
+      </aside>
+  
+      <section id="main-content">
+        <section class="wrapper">
+          <div class="row">
+            <div class="col-lg-12">
+              <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-laptop"><a href="/dashboard"></i>Dashboard</a></li>
+              </ol>
+              <form action="/purge" method="post">
+                <td><button name="addMeal" type="submit" class="btn btn-danger btn-block">PURGE</button></td>
+              </form>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <div class="info-box blue-bg">
+                <i class="fas fa-utensils"></i>
+                <div class="count"><%= Math.round(user.todayCalories) %></div>
+                <div class="title">Calories</div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <div class="info-box brown-bg">
+                <i class="fas fa-drumstick-bite"></i>
+                <div class="count"><%= Math.round(user.todayProteins) %>g</div>
+                <div class="title">Proteins</div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <div class="info-box dark-bg">
+                <i class="fas fa-bread-slice"></i>
+                <div class="count"><%= Math.round(user.todayCarbs) %>g</div>
+                <div class="title">Carbs</div>
+              </div>
+            </div>
+  
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <div class="info-box green-bg">
+                <i class="fas fa-cheese"></i>
+                <div class="count"><%= Math.round(user.todayFats) %>g</div>
+                <div class="title">Fats</div>
+              </div>
+            </div>
+  
+          </div>
+
+          <div class="row">
+  
+            <div class="col-lg-9 col-md-12">
+              <div class="panel panel-default">
+                
+                <div class="panel-body table-responsive">
+                  <table class="table bootstrap-datatable countries">
+                    <h4>Daily goals </h4>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Today(g)</th>
+                        <th>Goal(g)</th>
+                        <th>Percentage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Calories</td>
+                        <td id= "todayCalories"><%= Math.round(user.todayCalories) %></td>
+                        <td id = "totalCalories"><%= Math.round(MSJEquation) %></td>
+                        <td>
+                          <div class="progress thin">
+                            <div id="pbCalories" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                          </div>
+                          <script>
+                            var totalCalories = Number(document.getElementById('totalCalories').innerText);
+                            var todayCalories = Number(document.getElementById('todayCalories').innerText);
+                            document.getElementById('pbCalories').style.width = Math.ceil((todayCalories / totalCalories) * 100) + "%";
+                            if(Math.ceil((todayCalories / totalCalories) * 100) > 100){
+                                document.getElementById('pbCalories').classList.add("progress-bar-danger")
+                              } else {
+                                document.getElementById('pbCalories').classList.remove("progress-bar-danger")
+                              }
+                          </script>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Proteins</td>
+                        <td id="todayProteins"><%= Math.round(user.todayProteins) %></td>
+                        <td id="totalProteins"><%= Math.round((((MSJEquation / 100) * user.percentProteins) / 4)) %></td>
+                        <td>
+                          <div class="progress thin">
+                            <div id="pbProteins" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                            <script>
+                              var totalProteins = Number(document.getElementById('totalProteins').innerText);
+                              var todayProteins = Number(document.getElementById('todayProteins').innerText);
+                              document.getElementById('pbProteins').style.width = Math.ceil((todayProteins / totalProteins) * 100) + "%";
+                              if(Math.ceil((todayProteins / totalProteins) * 100) > 100){
+                                document.getElementById('pbProteins').classList.add("progress-bar-danger")
+                              } else {
+                                document.getElementById('pbProteins').classList.remove("progress-bar-danger")
+                              }
+                            </script>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Carbs</td>
+                        <td id="todayCarbs"><%= Math.round(user.todayCarbs) %></td>
+                        <td id="totalCarbs"><%= Math.ceil(MSJEquation * (user.percentCarbs / 100) / 4) %></td>
+                        <td>
+                          <div class="progress thin">
+                            <div id="pbCarbs" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                            <script>
+                              var totalCarbs = Number(document.getElementById('totalCarbs').innerText);
+                              var todayCarbs = Number(document.getElementById('todayCarbs').innerText);
+                              document.getElementById('pbCarbs').style.width = Math.ceil((todayCarbs / totalCarbs) * 100) + "%";
+                              if(Math.ceil((todayCarbs / totalCarbs) * 100) > 100){
+                                document.getElementById('pbCarbs').classList.add("progress-bar-danger")
+                              } else {
+                                document.getElementById('pbCarbs').classList.remove("progress-bar-danger")
+                              }
+                            </script>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Fats</td>
+                        <td id="todayFats"><%= Math.round(user.todayFats) %></td>
+                        <td id="totalFats"><%= Math.ceil(MSJEquation * (user.percentFats / 100) / 9) %></td>
+                        <td>
+                          <div class="progress thin">
+                            <div id="pbFats" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                            <script>
+                              var totalFats = Number(document.getElementById('totalFats').innerText);
+                              var todayFats = Number(document.getElementById('todayFats').innerText);
+                              document.getElementById('pbFats').style.width = Math.ceil((todayFats / totalFats) * 100) + "%";
+                              if(Math.ceil((todayFats / totalFats) * 100) > 100){
+                                document.getElementById('pbFats').classList.add("progress-bar-danger")
+                              } else {
+                                document.getElementById('pbFats').classList.remove("progress-bar-danger")
+                              }
+                            </script>
+                          </div>
+                        </td>
+                      </tr>                 
+                    </tbody>
+                  </table>
+                </div>
+                
+              </div>
+  
+            </div>
+            <!--/col-->
+            <div class="col-md-3">
+  
+              <div class="social-box facebook">
+                <i class="fa fa-facebook"></i>
+                <ul>
+                  <li>
+                    <strong>0</strong>
+                    <span>friends</span>
+                  </li>
+                  <li>
+                    <strong>0</strong>
+                    <span>feeds</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="col-md-3">
+  
+              <div class="social-box twitter">
+                <i class="fa fa-twitter"></i>
+                <ul>
+                  <li>
+                    <strong>0</strong>
+                    <span>followers</span>
+                  </li>
+                  <li>
+                    <strong>0</strong>
+                    <span>tweets</span>
+                  </li>
+                </ul>
+              </div>
+  
+            </div>
+  
+          </div> 
+
+          <div class="row">
+  
+            <div class="col-md-9">
+              <div class="panel panel-default">
+                <div class="panel-body table-responsive">
+                  <table class="table bootstrap-datatable countries">
+                    <h4>Today's meals</h4>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Calories</th>
+                        <th>Proteins</th>
+                        <th>Carbs</th>
+                        <th>Fats</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%for (var i = 0; i < meals.length; i++) { if(meals[i].eatenToday == true) { %>
+                      <tr>
+                        <td><%= meals[i].eatenCount %>x <%= meals[i].name %></td>
+                        <td><%= meals[i].calories %></td>
+                        <td><%= meals[i].proteins %>g</td>
+                        <td><%= meals[i].carbs %>g</td>
+                        <td><%= meals[i].fats %>g</td>
+                      </tr>
+                      <% }}%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <section class="panel">
+                <header class="panel-heading">
+                  Quick eat
+                </header>
+                <div class="panel-body">
+                  <form class="" action="/dashboard" method="post">
+                    <select name="mealEaten" class="form-control m-bot15">
+                    <% for (var i = 0; i < meals.length; i++) { %>
+                      <option><%= meals[i].name %></option>
+                    <% } %>
+                    </select>
+                    <button name="addMeal" type="submit" class="btn btn-primary btn-block">Eat</button>
+                  </form>
+                </div>
+              </section>             
+            </div>
+          </div>        
+        </section>        
+      </section>
+    </section>
+  
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui-1.10.4.min.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="assets/jquery-knob/js/jquery.knob.js"></script>
+    <script src="js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/fullcalendar.min.js"></script>
+      <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+      <script src="js/calendar-custom.js"></script>
+      <script src="js/jquery.rateit.min.js"></script>
+      <script src="js/jquery.customSelect.min.js"></script>
+      <script src="assets/chart-master/Chart.js"></script>
+  
+      <script src="js/scripts.js"></script>
+      <script src="js/sparkline-chart.js"></script>
+      <script src="js/easy-pie-chart.js"></script>
+      <script src="js/jquery-jvectormap-1.2.2.min.js"></script>
+      <script src="js/jquery-jvectormap-world-mill-en.js"></script>
+      <script src="js/xcharts.min.js"></script>
+      <script src="js/jquery.autosize.min.js"></script>
+      <script src="js/jquery.placeholder.min.js"></script>
+      <script src="js/gdp-data.js"></script>
+      <script src="js/morris.min.js"></script>
+      <script src="js/sparklines.js"></script>
+      <script src="js/charts.js"></script>
+      <script src="js/jquery.slimscroll.min.js"></script>
+      <script>
+        $(function() {
+          $(".knob").knob({
+            'draw': function() {
+              $(this.i).val(this.cv + '%')
+            }
+          })
+        });
+  
+        $(document).ready(function() {
+          $("#owl-slider").owlCarousel({
+            navigation: true,
+            slideSpeed: 300,
+            paginationSpeed: 400,
+            singleItem: true
+  
+          });
+        });
+  
+  
+        $(function() {
+          $('select.styled').customSelect();
+        });
+  
+        $(function() {
+          $('#map').vectorMap({
+            map: 'world_mill_en',
+            series: {
+              regions: [{
+                values: gdpData,
+                scale: ['#000', '#000'],
+                normalizeFunction: 'polynomial'
+              }]
+            },
+            backgroundColor: '#eef3f7',
+            onLabelShow: function(e, el, code) {
+              el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+            }
+          });
+        });
+      </script>
+  
+  </body>
+</html>

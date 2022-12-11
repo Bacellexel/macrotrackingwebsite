@@ -1,0 +1,71 @@
+<form class="" action="/edit" method="post">
+    <div>
+        <label name="forName">Name</label>
+        <input type="text" name="name"/>
+    </div>
+    <div>
+        <label name="forGender">Gender</label>
+        <select name="gender" required> >
+            <%= dataset = ["Male", "Female"]; %>
+            <%= removeUserGender = dataset.splice(dataset.indexOf(user.gender), 1) %>
+            <%= data = [user.gender, dataset] %>
+            <% for (var i = 0; i < data.length; i++) { %>
+                <option>
+                   <%= data[i] %>
+                </option>
+                <% } %>
+        </select>
+    </div>
+    <div>
+        <label name="forGoal">Goal</label>
+        <select name="goal" required> >
+            <%= dataset = ["Bulk", "Weight Loss"]; %>
+            <%= removeUserGoal = dataset.splice(dataset.indexOf(user.goal), 1) %>
+            <%= data = [user.goal, dataset] %>
+            <% for (var i = 0; i < data.length; i++) { %>
+                <option>
+                   <%= data[i] %>
+                </option>
+                <% } %>
+        </select>
+    </div>
+    <div>
+        <label name="forActivity">Activity level</label>
+        <select name="activity" required>
+            <%= dataset = ["Sedentary", "Lightly active", "Moderatly active", "Very active", "Extra active"]; %>
+            <%= removeUserActivityLevel = dataset.splice(dataset.indexOf(user.activity), 1) %>
+            <%= pushUserActivity = dataset.splice(0,0,user.activity); %>
+            <%= data = dataset %>
+            <% for (var i = 0; i < data.length; i++) { %>
+                <option>
+                   <%= data[i] %>
+                </option>
+                <% } %>
+        </select>
+    </div>
+    <div>
+        <label name="forWeight">Weight(kg)</label>
+        <input type="number" name="weight" value= <%= user.weight %> />
+    </div>
+    <div>
+        <label name="forHeight">Height(cm)</label>
+        <input type="number" name="height" value= <%= user.height %> />
+    </div>
+    <div>
+        <label name="forBirthDate">Date of birth</label>
+        <input type="date" name="birthDate" value= <%= user.dateOfBirth.toISOString().slice(0,10); %> required />
+    </div>
+    <div>
+        <label name="forProteins">Proteins%</label>
+        <input type="number" name="proteins" value=<%= user.percentProteins %> />
+    </div>
+    <div>
+        <label name="forCarbs">Carbs%</label>
+        <input type="number" name="carbs" value=<%= user.percentCarbs %> />
+    </div>
+    <div>
+        <label name="forFats">Fats%</label>
+        <input type="number" name="fats" value=<%= user.percentFats %> />
+    </div>
+    <button name="editTotalCalories" type="submit" class="btn btn-primary btn-block">Update</button>
+</form>
